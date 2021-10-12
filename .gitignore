@@ -1,0 +1,12 @@
+/*
+/*/
+
+!.gitignore
+!.gitattributes
+!LICENSE.md
+!README.md
+
+!/Assets/
+!/ProjectSettings/
+!/Packages/
+!/Resources/
