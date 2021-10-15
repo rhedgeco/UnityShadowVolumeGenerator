@@ -1,12 +1,19 @@
+# initial ignore for everything
 /*
 /*/
 
+# whitelist important git files
 !.gitignore
 !.gitattributes
 !LICENSE.md
 !README.md
 
+# whitelist only important unity directories
 !/Assets/
 !/ProjectSettings/
 !/Packages/
 !/Resources/
+
+# ignore all blender blend1 files that may be included
+*.blend1
+*.blend1.meta
