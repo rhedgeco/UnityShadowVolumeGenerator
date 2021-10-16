@@ -16,13 +16,13 @@ namespace StencilShadowGenerator.Core
 
         [SerializeField] [Range(0, 1)] private float bias = 0.001f;
         [SerializeField] private float extrudeDistance = 10f;
-        [SerializeField] private Material shadowVolumeMaterial;
 
         #endregion
 
         #region Private Members
 
         private Light _light;
+        private Material _shadowVolumeMaterial;
 
         private Dictionary<ShadowVolume, VolumeData> _volumes =
             new Dictionary<ShadowVolume, VolumeData>();
@@ -37,6 +37,7 @@ namespace StencilShadowGenerator.Core
         private void Awake()
         {
             _light = GetComponent<Light>();
+            _shadowVolumeMaterial = new Material(Shader.Find("Hidden/ShadowVolumeStencilWriter"));
             ShadowVolume.VolumeAdded.AddListener(VolumeAdded);
             ShadowVolume.VolumeRemoved.AddListener(VolumeRemoved);
         }
@@ -91,7 +92,7 @@ namespace StencilShadowGenerator.Core
         private void VolumeAdded(ShadowVolume volume)
         {
             if (_volumes.ContainsKey(volume)) return;
-            _volumes.Add(volume, new VolumeData(volume, transform, shadowVolumeMaterial));
+            _volumes.Add(volume, new VolumeData(volume, transform, _shadowVolumeMaterial));
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-Shader "ShadowVolume/StencilWriter"{
+Shader "Hidden/ShadowVolumeStencilWriter"{
   Properties{
     _ShadowZOffset ("Shadow ZOffset", Range(0,1)) = 0.01
   }
