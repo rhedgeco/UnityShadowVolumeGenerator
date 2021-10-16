@@ -34,7 +34,7 @@ namespace StencilShadowGenerator.Core.MeshJobs
                     VertexData = vertexData,
                     Vertices = vertices
                 };
-                handle = job.Schedule(vertices.Length, 16);
+                handle = job.Schedule(vertices.Length, 64);
             }
             else if (light.type == LightType.Point)
             {
@@ -46,7 +46,7 @@ namespace StencilShadowGenerator.Core.MeshJobs
                     VertexData = vertexData,
                     Vertices = vertices
                 };
-                handle = job.Schedule(vertices.Length, 16);
+                handle = job.Schedule(vertices.Length, 64);
             }
 
             return handle;
