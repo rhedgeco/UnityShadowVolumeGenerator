@@ -20,7 +20,7 @@ namespace StencilShadowGenerator.Core.MeshJobs
         /// <param name="vertexData">Original vertex data from volume source</param>
         /// <param name="vertices">array of vertices to place modifications</param>
         /// <returns>A nullable job handle with scheduled job</returns>
-        public static JobHandle? CreateLightJob(Light light, float extrudeDistance,
+        public static JobHandle? CreateLightJob(Light light, float extrudeDistance, float bias,
             TransformData transformData, NativeArray<Vertex> vertexData, NativeArray<Vector3> vertices)
         {
             JobHandle? handle = null;
@@ -29,6 +29,7 @@ namespace StencilShadowGenerator.Core.MeshJobs
                 DirectionalLightExtrudeJob job = new DirectionalLightExtrudeJob
                 {
                     Direction = light.transform.forward,
+                    Bias = bias,
                     ExtrudeDistance = extrudeDistance,
                     TransformData = transformData,
                     VertexData = vertexData,
@@ -41,6 +42,7 @@ namespace StencilShadowGenerator.Core.MeshJobs
                 PointLightExtrudeJob job = new PointLightExtrudeJob
                 {
                     Point = light.transform.position,
+                    Bias = bias,
                     ExtrudeDistance = extrudeDistance,
                     TransformData = transformData,
                     VertexData = vertexData,

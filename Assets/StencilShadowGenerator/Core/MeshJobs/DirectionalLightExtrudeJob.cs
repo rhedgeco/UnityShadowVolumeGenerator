@@ -14,6 +14,7 @@ namespace StencilShadowGenerator.Core.MeshJobs
     public struct DirectionalLightExtrudeJob : IJobParallelFor
     {
         public float3 Direction;
+        public float Bias;
         public float ExtrudeDistance;
         public TransformData TransformData;
         public NativeArray<Vertex> VertexData;
@@ -28,9 +29,11 @@ namespace StencilShadowGenerator.Core.MeshJobs
             point = TransformData.Rotation * point;
             normal = TransformData.Rotation * normal;
             point += TransformData.Position;
-            
+
             if (math.dot(normal, Direction) >= 0)
                 point += Direction * ExtrudeDistance;
+            else
+                point += Direction * Bias;
             Vertices[index] = point;
         }
     }

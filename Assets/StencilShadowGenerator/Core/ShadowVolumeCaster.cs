@@ -14,6 +14,7 @@ namespace StencilShadowGenerator.Core
     {
         #region Serialized Fields
 
+        [SerializeField] [Range(0, 1)] private float bias = 0.001f;
         [SerializeField] private float extrudeDistance = 10f;
         [SerializeField] private Material shadowVolumeMaterial;
 
@@ -61,8 +62,8 @@ namespace StencilShadowGenerator.Core
                 VolumeData data = pair.Value;
                 data.ResetTransform();
                 Transform t = volume.transform;
-                JobHandle? handle = LightJobManager.CreateLightJob(_light, extrudeDistance, volume.TransformData,
-                    volume.OriginalVertices, data.AdjustedVertices);
+                JobHandle? handle = LightJobManager.CreateLightJob(_light, extrudeDistance, bias,
+                    volume.TransformData, volume.OriginalVertices, data.AdjustedVertices);
                 if (!handle.HasValue) Debug.LogWarning($"Cannot create shadow volume with light type {_light.type}");
                 else _lightHandles.Add((handle.Value, data));
             }

@@ -14,6 +14,7 @@ namespace StencilShadowGenerator.Core.MeshJobs
     public struct PointLightExtrudeJob : IJobParallelFor
     {
         public float3 Point;
+        public float Bias;
         public float ExtrudeDistance;
         public TransformData TransformData;
         public NativeArray<Vertex> VertexData;

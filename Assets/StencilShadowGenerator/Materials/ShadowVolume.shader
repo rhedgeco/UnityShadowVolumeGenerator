@@ -15,9 +15,8 @@ Shader "ShadowVolume/StencilWriter"{
     Pass{
       Cull Off
       Stencil{
-        Ref 0
-        PassBack DecrWrap
-        PassFront IncrWrap
+        ZFailBack IncrWrap
+        ZFailFront DecrWrap
       }
       ColorMask 0
     }
