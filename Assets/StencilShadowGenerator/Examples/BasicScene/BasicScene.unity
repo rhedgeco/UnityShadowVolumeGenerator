@@ -327,8 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bias: 0.01
-  extrudeDistance: 10
-  shadowVolumeMaterial: {fileID: 2100000, guid: bb0eed757e7bbb04b81506288d4cab93, type: 2}
+  extrudeDistance: 100
 --- !u!114 &705507997
 MonoBehaviour:
   m_ObjectHideFlags: 0
