@@ -41,6 +41,9 @@ namespace StencilShadowGenerator.Core
         {
             _object.transform.Reset();
         }
+
+        public void Hide() => _object.SetActive(false);
+        public void Show() => _object.SetActive(true);
         
         public void Dispose()
         {
