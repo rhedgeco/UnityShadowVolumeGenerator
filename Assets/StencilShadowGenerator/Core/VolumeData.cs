@@ -2,6 +2,7 @@ using System;
 using StencilShadowGenerator.Core.Extensions;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Object = UnityEngine.Object;
 
 namespace StencilShadowGenerator.Core
@@ -22,8 +23,14 @@ namespace StencilShadowGenerator.Core
             Mesh = volume.CreateMeshCopy();
             _object = new GameObject($"{volume.name}_VOLUME");
             _object.transform.parent = parent;
-            _object.AddComponent<MeshFilter>().mesh = Mesh;
-            _object.AddComponent<MeshRenderer>().material = volumeMaterial;
+
+            MeshFilter filter = _object.AddComponent<MeshFilter>();
+            MeshRenderer renderer = _object.AddComponent<MeshRenderer>();
+            filter.mesh = Mesh;
+            renderer.material = volumeMaterial;
+            renderer.shadowCastingMode = ShadowCastingMode.Off;
+            renderer.lightProbeUsage = LightProbeUsage.Off;
+            renderer.reflectionProbeUsage = ReflectionProbeUsage.Off;
             AdjustedVertices = new NativeArray<Vector3>(Mesh.vertexCount, Allocator.Persistent);
         }
 
