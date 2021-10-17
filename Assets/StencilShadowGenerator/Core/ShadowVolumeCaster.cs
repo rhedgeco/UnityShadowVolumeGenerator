@@ -62,7 +62,6 @@ namespace StencilShadowGenerator.Core
                 ShadowVolume volume = pair.Key;
                 VolumeData data = pair.Value;
                 data.ResetTransform();
-                Transform t = volume.transform;
                 JobHandle? handle = LightJobManager.CreateLightJob(_light, extrudeDistance, bias,
                     volume.TransformData, volume.OriginalVertices, data.AdjustedVertices);
                 if (!handle.HasValue) Debug.LogWarning($"Cannot create shadow volume with light type {_light.type}");
