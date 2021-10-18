@@ -50,7 +50,7 @@ namespace StencilShadowGenerator.Core
 
         private void Awake()
         {
-            _shadowVolumeMaterial = new Material(Shader.Find("Hidden/ShadowVolumeStencilWriter"));
+            _shadowVolumeMaterial = new Material(Shader.Find("Hidden/ShadowVolumes/StencilWriter"));
             ShadowVolume.VolumeAdded.AddListener(VolumeAdded);
             ShadowVolume.VolumeRemoved.AddListener(VolumeRemoved);
         }
