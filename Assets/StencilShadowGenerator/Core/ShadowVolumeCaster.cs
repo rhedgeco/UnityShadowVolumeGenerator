@@ -30,14 +30,27 @@ namespace StencilShadowGenerator.Core
         private List<(JobHandle, VolumeData)> _lightHandles =
             new List<(JobHandle, VolumeData)>();
 
+        private Light Light
+        {
+            get
+            {
+                if (_light == null) _light = GetComponent<Light>();
+                return _light;
+            }
+        }
+
+        private bool IsMainLight
+        {
+            get => RenderSettings.sun == Light;
+        }
+
         #endregion
 
         #region Unity Event Methods
 
         private void Awake()
         {
-            _light = GetComponent<Light>();
-            _shadowVolumeMaterial = new Material(Shader.Find("Hidden/ShadowVolumeStencilWriter"));
+            _shadowVolumeMaterial = new Material(Shader.Find("Hidden/ShadowVolumes/StencilWriter"));
             ShadowVolume.VolumeAdded.AddListener(VolumeAdded);
             ShadowVolume.VolumeRemoved.AddListener(VolumeRemoved);
         }
@@ -55,6 +68,15 @@ namespace StencilShadowGenerator.Core
 
         private void LateUpdate()
         {
+            // check for main light
+            // screen space shadows only works for main light with forward rendering method
+            // we prevent it from rendering volumes here, but this also allows swapping of sun source
+            if (!IsMainLight)
+            {
+                foreach (VolumeData data in _volumes.Values) data.Hide();
+                return;
+            }
+
             // create all job handles
             _lightHandles.Clear();
             foreach (KeyValuePair<ShadowVolume, VolumeData> pair in _volumes)
@@ -62,10 +84,10 @@ namespace StencilShadowGenerator.Core
                 ShadowVolume volume = pair.Key;
                 VolumeData data = pair.Value;
                 data.ResetTransform();
-                Transform t = volume.transform;
-                JobHandle? handle = LightJobManager.CreateLightJob(_light, extrudeDistance, bias,
+                data.Show(); // in case it was previously hidden
+                JobHandle? handle = LightJobManager.CreateLightJob(Light, extrudeDistance, bias,
                     volume.TransformData, volume.OriginalVertices, data.AdjustedVertices);
-                if (!handle.HasValue) Debug.LogWarning($"Cannot create shadow volume with light type {_light.type}");
+                if (!handle.HasValue) Debug.LogWarning($"Cannot create shadow volume with light type {Light.type}");
                 else _lightHandles.Add((handle.Value, data));
             }
 

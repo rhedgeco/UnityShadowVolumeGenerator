@@ -1,5 +1,5 @@
 *This repo is under heavy development.*
-
+![](Resources/shadows.gif)
 # Unity Shadow Volume Generator (Stencil Shadows)
 Stencil shadow volumes are incredibly useful for certain styles of shadows in games.
 Then why are they so hard to find info on and make?
@@ -8,6 +8,10 @@ This repository hopefully addresses some of that problem.
 
 It's also blazing fast. It integrates using the job system and burst compiler.
 This enables the volume extrusions to happen in fractions of a millisecond.
+
+## Limitations
+- Limited to URP 11 and up with forward renderer. URP 11 reintroduced screen space shadows.
+- Only renders shadows from main sun source
 
 ## What are Shadow Volumes?
 Shadow volumes are recognized by the CRISP and ACCURATE shadows that they cast.
