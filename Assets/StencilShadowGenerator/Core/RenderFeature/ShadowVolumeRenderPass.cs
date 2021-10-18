@@ -28,6 +28,8 @@ namespace StencilShadowGenerator.Core.RenderFeature
             _shaderTagIdList.Add(new ShaderTagId("UniversalForwardOnly"));
             _shaderTagIdList.Add(new ShaderTagId("LightweightForward"));
             _shaderTagIdList.Add(new ShaderTagId("SRPDefaultUnlit"));
+
+            renderPassEvent = RenderPassEvent.BeforeRenderingOpaques;
         }
 
         public override void OnCameraSetup(CommandBuffer cmd, ref RenderingData renderingData)
