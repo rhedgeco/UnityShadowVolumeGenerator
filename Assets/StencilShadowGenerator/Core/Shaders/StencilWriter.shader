@@ -7,6 +7,7 @@ Shader "Hidden/ShadowVolumes/StencilWriter"
         {
             "RenderType"="Opaque"
             "Queue"="Geometry+1"
+            "LightMode"="ShadowVolume"
         }
         ZWrite Off
 
