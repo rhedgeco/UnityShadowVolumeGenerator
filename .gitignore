@@ -12,7 +12,7 @@
 !/Assets/
 !/ProjectSettings/
 !/Packages/
-!/Resources/
+!/ReadmeResources/
 
 # ignore all blender blend1 files that may be included
 *.blend1
