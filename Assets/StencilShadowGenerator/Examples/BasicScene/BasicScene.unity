@@ -154,6 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extrudeDistance: 10
+  shadowBias: 0.01
   preGenerateMesh: 0
   preGeneratedMesh: {fileID: 0}
 --- !u!23 &55062648
@@ -230,7 +232,6 @@ GameObject:
   m_Component:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
-  - component: {fileID: 705507996}
   - component: {fileID: 705507997}
   m_Layer: 0
   m_Name: Directional Light
@@ -315,20 +316,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
---- !u!114 &705507996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705507993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03f68d3bda704c03ae559559a190a4df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bias: 0.01
-  extrudeDistance: 10
 --- !u!114 &705507997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +456,6 @@ GameObject:
   - component: {fileID: 1104078742}
   - component: {fileID: 1104078741}
   - component: {fileID: 1104078740}
-  - component: {fileID: 1104078739}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -477,20 +463,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &1104078739
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1104078738}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1104078740
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -586,6 +558,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extrudeDistance: 10
+  shadowBias: 0.01
   preGenerateMesh: 0
   preGeneratedMesh: {fileID: 0}
 --- !u!23 &1293399366
@@ -684,6 +658,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extrudeDistance: 10
+  shadowBias: 0.01
   preGenerateMesh: 0
   preGeneratedMesh: {fileID: 0}
 --- !u!23 &1570063210
@@ -794,6 +770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extrudeDistance: 10
+  shadowBias: 0.01
   preGenerateMesh: 0
   preGeneratedMesh: {fileID: 0}
 --- !u!23 &1895958668
@@ -906,6 +884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extrudeDistance: 10
+  shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: e22c63843469dd649a18bf3599c36ce4, type: 2}
 --- !u!114 &5017319786131797813
@@ -953,6 +933,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extrudeDistance: 10
+  shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: b294a12f3fce7144e93a55dc2e7b8901, type: 2}
 --- !u!114 &5090967344810577137
@@ -1000,6 +982,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extrudeDistance: 10
+  shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: 283a89d0252ddb544ab58e06e4ee2674, type: 2}
 --- !u!114 &5305753964585769671

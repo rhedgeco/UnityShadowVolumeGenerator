@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using StencilShadowGenerator.Core.Attributes.DisplayConditional;
+using StencilShadowGenerator.Core.Extensions;
 using StencilShadowGenerator.Core.ShadowMeshHelpers;
-using Unity.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace StencilShadowGenerator.Core
 {
@@ -16,14 +15,17 @@ namespace StencilShadowGenerator.Core
     {
         #region Static Fields
 
-        // Events for when a volume is added or removed
-        public static readonly UnityEvent<ShadowVolume> VolumeAdded = new UnityEvent<ShadowVolume>();
-        public static readonly UnityEvent<ShadowVolume> VolumeRemoved = new UnityEvent<ShadowVolume>();
-
+        // property fields for shadow volume shader
+        private static readonly int Direction = Shader.PropertyToID("_Direction");
+        private static readonly int Extrude = Shader.PropertyToID("_Extrude");
+        private static readonly int Bias = Shader.PropertyToID("_Bias");
+        
         #endregion
 
         #region Serialized Fields
 
+        [SerializeField] private float extrudeDistance = 100;
+        [SerializeField] [Range(0,1)] private float shadowBias = 0.01f;
         [SerializeField] private bool preGenerateMesh;
 
         [SerializeField] [DisplayIf(nameof(preGenerateMesh))]
@@ -34,29 +36,8 @@ namespace StencilShadowGenerator.Core
         #region Private Members
 
         private Mesh _mesh;
-        private TransformData _transformData;
-        private NativeArray<Vertex> _originalVertices;
-
-        #endregion
-
-        #region Properties
-        
-        public NativeArray<Vertex> OriginalVertices => _originalVertices;
-
-        /// <summary>
-        /// Gets the relevant transform data in a struct for later use in jobs
-        /// </summary>
-        public TransformData TransformData
-        {
-            get
-            {
-                Transform t = transform;
-                _transformData.Position = t.position;
-                _transformData.Rotation = t.rotation;
-                _transformData.Scale = t.lossyScale;
-                return _transformData;
-            }
-        }
+        private Material _material;
+        private GameObject _volume;
 
         #endregion
 
@@ -66,27 +47,23 @@ namespace StencilShadowGenerator.Core
         {
             if (!preGenerateMesh) _mesh = GenerateMesh();
             else if (preGeneratedMesh) _mesh = preGeneratedMesh;
-            else
-            {
-                _mesh = new Mesh();
-                Debug.LogWarning($"No pre generated mesh is assigned for [{name}].\n" +
-                                 $"Either assign a pre generated mesh, or turn off pre generation.");
-            }
-
-            CreateNativeVertexArray();
-        }
-
-        private void Start()
-        {
-            VolumeAdded.Invoke(this);
-        }
-
-        private void OnDestroy()
-        {
-            VolumeRemoved.Invoke(this);
+            else Debug.LogWarning($"No pre generated mesh is assigned for [{name}].\n" +
+                                  $"Either assign a pre generated mesh, or turn off pre generation.");
             
-            // be sure to dispose of array to avoid leaks
-            if (_originalVertices.IsCreated) _originalVertices.Dispose();
+            CreateVolumeMeshObject();
+        }
+
+        private void LateUpdate()
+        {
+            Light sun = RenderSettings.sun;
+            _volume.SetActive(false);
+            if (!sun) return;
+            _volume.SetActive(true);
+            
+            // set all material properties
+            _material.SetVector(Direction, sun.transform.forward);
+            _material.SetFloat(Extrude, extrudeDistance);
+            _material.SetFloat(Bias, shadowBias);
         }
 
         #endregion
@@ -94,20 +71,6 @@ namespace StencilShadowGenerator.Core
         #region Public Methods
 
         /// <summary>
-        /// Copies the internally created mesh for shadow casting
-        /// </summary>
-        /// <returns>Copy of the internal volume mesh</returns>
-        public Mesh CreateMeshCopy()
-        {
-            Mesh mesh = new Mesh();
-            mesh.MarkDynamic();
-            mesh.SetVertices(_mesh.vertices);
-            mesh.SetNormals(_mesh.normals);
-            mesh.SetTriangles(_mesh.triangles, 0);
-            return mesh;
-        }
-        
-                /// <summary>
         /// Creates a custom volume mesh based on the mesh filter that is attached
         /// </summary>
         /// <returns>A custom volume mesh</returns>
@@ -190,17 +153,18 @@ namespace StencilShadowGenerator.Core
         #region Private Methods
 
         /// <summary>
-        /// Creates a native vertex array for later use in jobs
+        /// Creates the shadow volume object
         /// </summary>
-        private void CreateNativeVertexArray()
+        private void CreateVolumeMeshObject()
         {
-            Vector3[] verts = _mesh.vertices;
-            Vector3[] norms = _mesh.normals;
-            _originalVertices = new NativeArray<Vertex>(_mesh.vertexCount, Allocator.Persistent);
-            for (int i = 0; i < _mesh.vertexCount; i++)
-            {
-                _originalVertices[i] = new Vertex(verts[i], norms[i]);
-            }
+            if (!_mesh) _mesh = new Mesh();
+            
+            _material = new Material(Shader.Find("Hidden/ShadowVolumes/StencilWriter"));
+            _volume = new GameObject($"{name}_ShadowVolume");
+            _volume.transform.parent = transform;
+            _volume.transform.LocalReset();
+            _volume.AddComponent<MeshFilter>().mesh = _mesh;
+            _volume.AddComponent<MeshRenderer>().material = _material;
         }
 
         #endregion

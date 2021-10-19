@@ -10,17 +10,23 @@ namespace StencilShadowGenerator.Core.Editor
         private ShadowVolume _instance;
         private SerializedProperty _preGenerateMesh;
         private SerializedProperty _preGeneratedMesh;
+        private SerializedProperty _extrudeDistance;
+        private SerializedProperty _shadowBias;
 
         private void OnEnable()
         {
             _instance = target as ShadowVolume;
             _preGenerateMesh = serializedObject.FindProperty("preGenerateMesh");
             _preGeneratedMesh = serializedObject.FindProperty("preGeneratedMesh");
+            _extrudeDistance = serializedObject.FindProperty("extrudeDistance");
+            _shadowBias = serializedObject.FindProperty("shadowBias");
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
+            EditorGUILayout.PropertyField(_extrudeDistance);
+            EditorGUILayout.PropertyField(_shadowBias);
             EditorGUILayout.PropertyField(_preGenerateMesh);
             if (_preGenerateMesh.boolValue)
             {
