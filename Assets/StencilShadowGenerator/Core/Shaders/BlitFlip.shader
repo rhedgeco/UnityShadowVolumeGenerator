@@ -12,6 +12,7 @@ Shader "Hidden/ShadowVolumes/BlitFlip"
             ZTest Always
             ZWrite Off
             Cull Off
+            Blend DstColor Zero
 
             CGPROGRAM
             #pragma vertex vert
