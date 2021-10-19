@@ -12,42 +12,47 @@ Shader "Hidden/ShadowVolumes/StencilWriter"
         Name "ShadowVolume"
         Tags
         {
-            "RenderType"="Opaque"
-            "Queue"="Geometry+1"
             "LightMode"="ShadowVolume"
         }
         ZWrite Off
 
         Pass
         {
+            // draw front and back faces
             Cull Off
+
+            // depth fail stencil logic
             Stencil
             {
                 ZFailBack IncrWrap
                 ZFailFront DecrWrap
             }
 
+            // dont draw any color
             ColorMask 0
 
+            // shader code to extrude mesh
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
             #include "UnityCG.cginc"
 
+            CBUFFER_START(UnityPerMaterial)
             float3 _Direction;
             float _Extrude;
             float _Bias;
+            CBUFFER_END
 
             struct Attributes
             {
-                half3 normal : NORMAL;
-                float4 positionOS : POSITION;
+                float3 normal : NORMAL;
+                float4 position : POSITION;
             };
 
             struct Varyings
             {
-                float4 positionHCS : SV_POSITION;
+                float4 position : SV_POSITION;
             };
 
             Varyings vert(Attributes IN)
@@ -55,13 +60,13 @@ Shader "Hidden/ShadowVolumes/StencilWriter"
                 Varyings OUT;
 
                 float3 worldNormal = UnityObjectToWorldNormal(IN.normal);
-                float3 worldPos = mul(unity_ObjectToWorld, IN.positionOS.xyz);
+                float3 worldPos = mul(unity_ObjectToWorld, IN.position.xyz);
                 
                 if (dot(worldNormal, _Direction) > 0) worldPos += normalize(_Direction) * _Extrude;
                 else worldPos += normalize(_Direction) * _Bias;
 
-                IN.positionOS.xyz = mul(unity_WorldToObject, worldPos);
-                OUT.positionHCS = UnityObjectToClipPos(IN.positionOS.xyz);
+                IN.position.xyz = mul(unity_WorldToObject, worldPos);
+                OUT.position = UnityObjectToClipPos(IN.position.xyz);
                 return OUT;
             }
 
