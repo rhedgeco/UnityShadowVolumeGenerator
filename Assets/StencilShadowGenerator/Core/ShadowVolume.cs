@@ -60,6 +60,9 @@ namespace StencilShadowGenerator.Core
             if (!sun) return;
             _volume.SetActive(true);
             
+            // update mesh bounds to prevent culling
+            _mesh.bounds = new Bounds(Vector3.zero, Vector3.one * extrudeDistance);
+            
             // set all material properties
             _material.SetVector(Direction, sun.transform.forward);
             _material.SetFloat(Extrude, extrudeDistance);
