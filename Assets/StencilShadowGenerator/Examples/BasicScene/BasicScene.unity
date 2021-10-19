@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bias: 0.01
-  extrudeDistance: 1000
+  extrudeDistance: 10
 --- !u!114 &705507997
 MonoBehaviour:
   m_ObjectHideFlags: 0
