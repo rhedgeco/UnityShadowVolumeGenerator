@@ -45,12 +45,28 @@ namespace StencilShadowGenerator.Core
 
         private void Awake()
         {
-            if (!preGenerateMesh) _mesh = GenerateMesh();
-            else if (preGeneratedMesh) _mesh = preGeneratedMesh;
-            else Debug.LogWarning($"No pre generated mesh is assigned for [{name}].\n" +
+            // check or create new mesh
+            Mesh mesh;
+            if (!preGenerateMesh) mesh = GenerateMesh();
+            else if (preGeneratedMesh) mesh = preGeneratedMesh;
+            else
+            {
+                mesh = new Mesh();
+                Debug.LogWarning($"No pre generated mesh is assigned for [{name}].\n" +
                                   $"Either assign a pre generated mesh, or turn off pre generation.");
+            }
             
-            CreateVolumeMeshObject();
+            // create mesh volume object
+            _material = new Material(Shader.Find("Hidden/ShadowVolumes/StencilWriter"));
+            _volume = new GameObject($"{name}_ShadowVolume");
+            _volume.transform.parent = transform;
+            _volume.transform.LocalReset();
+            _volume.AddComponent<MeshRenderer>().material = _material;
+
+            // get mesh copy from filter
+            MeshFilter filter = _volume.AddComponent<MeshFilter>();
+            filter.mesh = mesh;
+            _mesh = filter.mesh;
         }
 
         private void LateUpdate()
@@ -150,25 +166,6 @@ namespace StencilShadowGenerator.Core
             newMesh.SetTriangles(triangles, 0);
             newMesh.Optimize();
             return newMesh;
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        /// <summary>
-        /// Creates the shadow volume object
-        /// </summary>
-        private void CreateVolumeMeshObject()
-        {
-            if (!_mesh) _mesh = new Mesh();
-            
-            _material = new Material(Shader.Find("Hidden/ShadowVolumes/StencilWriter"));
-            _volume = new GameObject($"{name}_ShadowVolume");
-            _volume.transform.parent = transform;
-            _volume.transform.LocalReset();
-            _volume.AddComponent<MeshFilter>().mesh = _mesh;
-            _volume.AddComponent<MeshRenderer>().material = _material;
         }
 
         #endregion
