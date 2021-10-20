@@ -137,6 +137,7 @@ namespace StencilShadowGenerator.Core
                     triangles.Add(edge1.Vertex1);
 
                     edges.RemoveAt(i);
+                    break;
                 }
 
                 edges.RemoveAt(0);
