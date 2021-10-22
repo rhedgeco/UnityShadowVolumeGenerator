@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using StencilShadowGenerator.Core.Attributes.DisplayConditional;
 using StencilShadowGenerator.Core.Extensions;
@@ -14,6 +15,8 @@ namespace StencilShadowGenerator.Core
     public class ShadowVolume : MonoBehaviour
     {
         #region Static Fields
+
+        public static readonly List<ShadowVolume> Volumes = new List<ShadowVolume>();
 
         // property fields for shadow volume shader
         private static readonly int Direction = Shader.PropertyToID("_Direction");
@@ -38,6 +41,12 @@ namespace StencilShadowGenerator.Core
         private Mesh _mesh;
         private Material _material;
         private GameObject _volume;
+
+        #endregion
+
+        #region Public Members
+
+        public Mesh ShadowMesh => _mesh;
 
         #endregion
 
@@ -84,6 +93,9 @@ namespace StencilShadowGenerator.Core
             _material.SetFloat(Extrude, extrudeDistance);
             _material.SetFloat(Bias, shadowBias);
         }
+
+        private void OnEnable() => Volumes.Add(this);
+        private void OnDisable() => Volumes.Remove(this);
 
         #endregion
 
