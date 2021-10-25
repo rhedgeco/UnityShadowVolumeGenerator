@@ -79,16 +79,7 @@ namespace StencilShadowGenerator.Core.RenderFeature
                     ref renderingData, SortingCriteria.CommonOpaque);
                 occluderSettings.overrideMaterial = _occluderMaterial;
                 context.DrawRenderers(renderingData.cullResults, ref occluderSettings, ref _filteringSettings);
-                
-                // TODO: figure out some sort of command buffer batching solution
-                // so that meshes dont have to be instantiated as objects in scene
-                // also so that shadow transparency may be implemented at some point
-                /*foreach (ShadowVolume volume in ShadowVolume.Volumes)
-                {
-                    Matrix4x4 matrix = volume.transform.localToWorldMatrix;
-                    cmd.DrawMesh(volume.ShadowMesh, matrix, _shadowMaterial);
-                }*/
-                
+
                 // draw shadow volume stencil
                 DrawingSettings volumeSettings = CreateDrawingSettings(_volumeShader, 
                     ref renderingData, SortingCriteria.CommonOpaque);
