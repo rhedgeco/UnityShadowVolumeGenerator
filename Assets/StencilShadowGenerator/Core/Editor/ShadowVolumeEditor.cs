@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -37,6 +38,11 @@ namespace StencilShadowGenerator.Core.Editor
                     string path = EditorUtility.SaveFilePanelInProject(
                         "Select a location to save Mesh file...",
                         $"{defaultName}_ShadowVolumeMesh", "mesh", "");
+                    if (String.IsNullOrEmpty(path))
+                    {
+                        Debug.LogWarning("Mesh path not chosen. Failed to generate.");
+                        return;
+                    }
                     EditorUtility.DisplayProgressBar("Generating Mesh", "Calculating Volume", 0.25f);
                     Mesh mesh = _instance.GenerateMesh();
                     EditorUtility.DisplayProgressBar("Generating Mesh", "Saving mesh to disk", 0.85f);
