@@ -45,11 +45,9 @@ Shader "Hidden/ShadowVolumes/BlitFlip"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.texcoord = TRANSFORM_TEX(v.texcoord.xy, _MainTex);
 
-                // for some reason, when blitting multiple times
-                // the texture flips on the vertical axis
-                // i cannot for the life of me find why, so this is a hack i guess lol
-                if (_ProjectionParams.x < 0)
-                    o.texcoord.y = 1 - o.texcoord.y;
+                #if UNITY_UV_STARTS_AT_TOP
+                o.texcoord.y = 1 - o.texcoord.y;
+                #endif
                 
                 return o;
             }
