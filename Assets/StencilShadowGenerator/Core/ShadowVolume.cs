@@ -26,7 +26,7 @@ namespace StencilShadowGenerator.Core
         #region Serialized Fields
 
         [SerializeField] private float extrudeDistance = 100;
-        [SerializeField] [Range(0,1)] private float shadowBias = 0.01f;
+        [SerializeField] [Range(0.01f,1)] private float shadowBias = 0.01f;
         [SerializeField] private bool preGenerateMesh;
 
         [SerializeField] [DisplayIf(nameof(preGenerateMesh))]

@@ -63,7 +63,15 @@ Shader "Hidden/ShadowVolumes/StencilWriter"
                 float3 worldPos = mul(unity_ObjectToWorld, IN.position.xyz);
                 
                 if (dot(worldNormal, _Direction) > 0) worldPos += normalize(_Direction) * _Extrude;
-                else worldPos += normalize(_Direction) * _Bias;
+
+                // we use an interesting take on "shadow bias" here
+                // shadow bias is usually pushing the depth at which a shadow appears
+                // so basically nudging the shadow along the axis that the light is casting
+                // but since we are using meshes here, we can nudge in any direction
+                // in this case, we nudge in the direction of the camera view
+                // this almost always prevents any sort of z-fighting from appearing
+                float3 viewDir = mul((float3x3)unity_CameraToWorld, float3(0,0,1));
+                worldPos += normalize(viewDir) * _Bias;
 
                 IN.position.xyz = mul(unity_WorldToObject, worldPos);
                 OUT.position = UnityObjectToClipPos(IN.position.xyz);

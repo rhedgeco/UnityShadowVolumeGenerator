@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: 9dc14ba05a459ce40bdd763c0a752f6e, type: 2}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: 119e1ec016076b64aa638f01a02c0ee2, type: 2}
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: 4870b5372f8167248a2ca426a0ba99f1, type: 2}
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: b73b345a88ebac246adb9db95ff17bf8, type: 2}
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: 838c3267909c70b479861c407a40b014, type: 2}
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: 805678f57061ad341b214c9fd7d2fa67, type: 2}
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: 5e6a7018bbb752d44834f09471d557c4, type: 2}
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: b85ec4f18063c7541af8c90f94fe6841, type: 2}
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: 638fe20ee18c3414da02d0889c1ba8f0, type: 2}
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 0
   preGeneratedMesh: {fileID: 0}
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: 64c6193334f75ed4db1b0ca97904621d, type: 2}
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extrudeDistance: 100
+  extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
   preGeneratedMesh: {fileID: 4300000, guid: a5266dc6ac617654ba540b5cdfbf162f, type: 2}
