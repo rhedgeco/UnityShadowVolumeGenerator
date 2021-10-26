@@ -95,7 +95,7 @@ namespace StencilShadowGenerator.Core.RenderFeature
                 // blit to shadow texture
                 bool flipY = camera.cameraType == CameraType.SceneView;
                 _blitMaterial.SetInt(FlipYCoord, flipY ? 0 : 1);
-                Blit(cmd, _tempTarget.Identifier(), _shadowMap, _blitMaterial);
+                cmd.Blit(_tempTarget.Identifier(), _shadowMap, _blitMaterial);
             }
 
             context.ExecuteCommandBuffer(cmd);
