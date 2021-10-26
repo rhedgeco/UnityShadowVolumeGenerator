@@ -6,9 +6,6 @@ Then why are they so hard to find info on and make?
 
 This repository hopefully addresses some of that problem.
 
-It's also blazing fast. It integrates using the job system and burst compiler.
-This enables the volume extrusions to happen in fractions of a millisecond.
-
 ## Limitations
 - Limited to URP 11 and up with forward renderer. URP 11 reintroduced screen space shadows.
 - Only renders shadows from main sun source
