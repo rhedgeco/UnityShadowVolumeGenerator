@@ -22,6 +22,7 @@ Shader "Hidden/ShadowVolumes/BlitFlip"
             UNITY_DECLARE_SCREENSPACE_TEXTURE(_MainTex);
             uniform float4 _MainTex_ST;
             uniform float4 _Color;
+            int _FlipYCoord;
 
             struct appdata_t
             {
@@ -45,9 +46,9 @@ Shader "Hidden/ShadowVolumes/BlitFlip"
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.texcoord = TRANSFORM_TEX(v.texcoord.xy, _MainTex);
 
-                #if UNITY_UV_STARTS_AT_TOP
-                o.texcoord.y = 1 - o.texcoord.y;
-                #endif
+                // hack to force texture to flip upside down
+                // useful for when blitting to a texture ends up getting flipped on the way out
+                if (_FlipYCoord) o.texcoord.y = 1 - o.texcoord.y;
                 
                 return o;
             }

@@ -7,6 +7,8 @@ namespace StencilShadowGenerator.Core.RenderFeature
 {
     class ShadowVolumeRenderPass : ScriptableRenderPass
     {
+        private static readonly int FlipYCoord = Shader.PropertyToID("_FlipYCoord");
+
         private readonly Material _occluderMaterial;
         private readonly Material _shadowMaterial;
         private readonly Material _blitMaterial;
@@ -91,7 +93,9 @@ namespace StencilShadowGenerator.Core.RenderFeature
                 cmd.SetViewProjectionMatrices(camera.worldToCameraMatrix, camera.projectionMatrix);
                 
                 // blit to shadow texture
-                cmd.Blit(_tempTarget.Identifier(), _shadowMap, _blitMaterial);
+                bool flipY = camera.cameraType == CameraType.SceneView;
+                _blitMaterial.SetInt(FlipYCoord, flipY ? 0 : 1);
+                Blit(cmd, _tempTarget.Identifier(), _shadowMap, _blitMaterial);
             }
 
             context.ExecuteCommandBuffer(cmd);
