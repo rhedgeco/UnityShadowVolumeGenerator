@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using StencilShadowGenerator.Core.Attributes.DisplayConditional;
 using StencilShadowGenerator.Core.Extensions;
