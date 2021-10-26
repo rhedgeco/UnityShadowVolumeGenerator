@@ -9,7 +9,6 @@ This repository hopefully addresses some of that problem.
 ## Limitations
 - Limited to URP 11 and up with forward renderer. URP 11 reintroduced screen space shadows.
 - Only renders shadows from main sun source
-- Only works with 2 manifold meshes (scheduled to be fixed)
 - Does not currently work with skinned meshes
 
 ## What are Shadow Volumes?
