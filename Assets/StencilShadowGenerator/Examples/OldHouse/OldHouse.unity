@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
@@ -151,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
@@ -283,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
@@ -299,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
@@ -315,6 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
@@ -331,6 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
@@ -347,6 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
@@ -408,6 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
@@ -424,6 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
@@ -459,6 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 0
@@ -539,6 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1
@@ -555,6 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41de3b5920ad4754f93aefc720e1ba56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTwoManifold: 1
   extrudeDistance: 500
   shadowBias: 0.01
   preGenerateMesh: 1

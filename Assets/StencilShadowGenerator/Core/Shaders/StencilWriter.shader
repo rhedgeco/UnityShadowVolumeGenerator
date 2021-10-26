@@ -73,6 +73,9 @@ Shader "Hidden/ShadowVolumes/StencilWriter"
                 float3 viewDir = mul((float3x3)unity_CameraToWorld, float3(0,0,1));
                 worldPos += normalize(viewDir) * _Bias;
 
+                // add light direction bias to cover a few edge cases
+                worldPos += normalize(_Direction) * _Bias;
+
                 IN.position.xyz = mul(unity_WorldToObject, worldPos);
                 OUT.position = UnityObjectToClipPos(IN.position.xyz);
                 return OUT;

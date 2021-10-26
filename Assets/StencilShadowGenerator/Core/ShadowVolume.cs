@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using StencilShadowGenerator.Core.Attributes.DisplayConditional;
 using StencilShadowGenerator.Core.Extensions;
 using StencilShadowGenerator.Core.ShadowMeshHelpers;
@@ -23,7 +22,9 @@ namespace StencilShadowGenerator.Core
         #endregion
 
         #region Serialized Fields
-
+        
+        [Tooltip("Faster rendering, slower mesh generation.")]
+        [SerializeField] private bool isTwoManifold = false;
         [SerializeField] private float extrudeDistance = 100;
         [SerializeField] [Range(0.01f,1)] private float shadowBias = 0.01f;
         [SerializeField] private bool preGenerateMesh;
@@ -98,74 +99,11 @@ namespace StencilShadowGenerator.Core
             MeshFilter filter = GetComponent<MeshFilter>();
             if (filter.sharedMesh == null) return new Mesh();
 
-            // First separate every triangle in the mesh, and calculate actual face normal
-            // also create edge collection for linking of faces with shadow extents
-            Mesh mesh = filter.sharedMesh;
-            List<Vector3> vertices = new List<Vector3>();
-            List<Vector3> normals = new List<Vector3>();
-            List<int> triangles = new List<int>();
-            List<Edge> edges = new List<Edge>();
-            for (int i = 0; i < mesh.triangles.Length; i += 3)
-            {
-                int i0 = mesh.triangles[i + 0];
-                int i1 = mesh.triangles[i + 1];
-                int i2 = mesh.triangles[i + 2];
-
-                Vector3 v0 = mesh.vertices[i0];
-                Vector3 v1 = mesh.vertices[i1];
-                Vector3 v2 = mesh.vertices[i2];
-                // create normal using cross product and right hand rule
-                Vector3 normal = Vector3.Cross(v1 - v0, v2 - v0);
-
-                vertices.Add(v0);
-                vertices.Add(v1);
-                vertices.Add(v2);
-
-                normals.Add(normal);
-                normals.Add(normal);
-                normals.Add(normal);
-
-                triangles.Add(i + 0);
-                triangles.Add(i + 1);
-                triangles.Add(i + 2);
-
-                edges.Add(new Edge(i + 0, i + 1));
-                edges.Add(new Edge(i + 1, i + 2));
-                edges.Add(new Edge(i + 2, i + 0));
-            }
-
-            // find matching edges and connect them with triangles
-            while (edges.Count > 0)
-            {
-                Edge edge1 = edges[0];
-                for (int i = 1; i < edges.Count; i++)
-                {
-                    Edge edge2 = edges[i];
-                    if (!edge1.CompareEdge(edge2, vertices)) continue;
-
-                    // add triangles to mesh
-                    triangles.Add(edge1.Vertex2);
-                    triangles.Add(edge1.Vertex1);
-                    triangles.Add(edge2.Vertex1);
-
-                    triangles.Add(edge2.Vertex2);
-                    triangles.Add(edge2.Vertex1);
-                    triangles.Add(edge1.Vertex1);
-
-                    edges.RemoveAt(i);
-                    break;
-                }
-
-                edges.RemoveAt(0);
-            }
-
-            Mesh newMesh = new Mesh();
-            newMesh.MarkDynamic();
-            newMesh.SetVertices(vertices);
-            newMesh.SetNormals(normals);
-            newMesh.SetTriangles(triangles, 0);
-            newMesh.Optimize();
-            return newMesh;
+            // if the mesh is 2 manifold, use 
+            if (isTwoManifold)
+                return filter.sharedMesh.Generate2ManifoldShadowVolume();
+            
+            return filter.sharedMesh.GenerateShadowVolumeMesh();
         }
 
         #endregion

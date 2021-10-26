@@ -12,6 +12,7 @@ namespace StencilShadowGenerator.Core.Editor
         private SerializedProperty _preGenerateMesh;
         private SerializedProperty _preGeneratedMesh;
         private SerializedProperty _extrudeDistance;
+        private SerializedProperty _twoManifold;
         private SerializedProperty _shadowBias;
 
         private void OnEnable()
@@ -20,6 +21,7 @@ namespace StencilShadowGenerator.Core.Editor
             _preGenerateMesh = serializedObject.FindProperty("preGenerateMesh");
             _preGeneratedMesh = serializedObject.FindProperty("preGeneratedMesh");
             _extrudeDistance = serializedObject.FindProperty("extrudeDistance");
+            _twoManifold = serializedObject.FindProperty("isTwoManifold");
             _shadowBias = serializedObject.FindProperty("shadowBias");
         }
 
@@ -52,6 +54,13 @@ namespace StencilShadowGenerator.Core.Editor
                     _preGeneratedMesh.objectReferenceValue = mesh;
                     EditorUtility.ClearProgressBar();
                 }
+            }
+            EditorGUILayout.PropertyField(_twoManifold);
+            if (_twoManifold.boolValue)
+            {
+                GUI.color = Color.yellow;
+                GUILayout.Label("WARNING: If a 2 manifold mesh is large, it may\n" +
+                                "dramatically increase mesh generation time");
             }
 
             serializedObject.ApplyModifiedProperties();
