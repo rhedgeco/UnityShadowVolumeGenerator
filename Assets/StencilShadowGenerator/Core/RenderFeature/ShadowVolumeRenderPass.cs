@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -15,7 +16,7 @@ namespace StencilShadowGenerator.Core.RenderFeature
         private readonly ShaderTagId _volumeShader;
         private readonly List<ShaderTagId> _occluderShaders;
         
-        private RenderTargetIdentifier _shadowMap;
+        private readonly RenderTargetHandle _screenSpaceShadowmap;
         private RenderTargetHandle _tempTarget;
         private ShadowVolumeRenderingSettings _settings;
         private FilteringSettings _filteringSettings;
@@ -26,7 +27,7 @@ namespace StencilShadowGenerator.Core.RenderFeature
             
             // set up render textures
             _tempTarget = RenderTargetHandle.CameraTarget;
-            _shadowMap = new RenderTargetIdentifier(Shader.PropertyToID("_ScreenSpaceShadowmapTexture"));
+            _screenSpaceShadowmap.Init("_ScreenSpaceShadowmapTexture");
             
             // set up materials
             _occluderMaterial = new Material(Shader.Find("Hidden/ShadowVolumes/White"));
@@ -52,6 +53,12 @@ namespace StencilShadowGenerator.Core.RenderFeature
         {
             RenderTextureDescriptor cameraTextureDescriptor = renderingData.cameraData.cameraTargetDescriptor;
             cameraTextureDescriptor.depthBufferBits = 0;
+            cameraTextureDescriptor.msaaSamples = 1;
+            cameraTextureDescriptor.graphicsFormat = RenderingUtils.SupportsGraphicsFormat(
+                GraphicsFormat.R8_UNorm, FormatUsage.Linear | FormatUsage.Render)
+                ? GraphicsFormat.R8_UNorm
+                : GraphicsFormat.B8G8R8A8_UNorm;
+            
             cmd.GetTemporaryRT(_tempTarget.id, cameraTextureDescriptor, FilterMode.Point);
             ConfigureTarget(_tempTarget.Identifier());
         }
@@ -95,7 +102,7 @@ namespace StencilShadowGenerator.Core.RenderFeature
                 // blit to shadow texture
                 bool flipY = camera.cameraType == CameraType.SceneView;
                 _blitMaterial.SetInt(FlipYCoord, flipY ? 0 : 1);
-                cmd.Blit(_tempTarget.Identifier(), _shadowMap, _blitMaterial);
+                cmd.Blit(_tempTarget.Identifier(), _screenSpaceShadowmap.id, _blitMaterial);
             }
 
             context.ExecuteCommandBuffer(cmd);
