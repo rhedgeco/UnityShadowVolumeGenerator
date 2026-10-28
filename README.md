@@ -1,4 +1,3 @@
-*This repo is under heavy development.*
 ![](ReadmeResources/shadows.gif)
 # Unity Shadow Volume Generator (Stencil Shadows)
 Stencil shadow volumes are incredibly useful for certain styles of shadows in games.
